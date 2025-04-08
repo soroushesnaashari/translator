@@ -14,17 +14,18 @@ export function TranslatingTitle() {
       const nextIndex = (currentIndex + 1) % languages.length;
       setCurrentLang(languages[nextIndex]);
       setIsChanging(false);
-    }, 500);
+    }, 700); // Increased transition time for smoother effect
   }, [currentLang, languages]);
   
   useEffect(() => {
-    const interval = setInterval(changeLang, 3000);
+    const interval = setInterval(changeLang, 4000); // Increased interval for better readability
     return () => clearInterval(interval);
   }, [changeLang]);
   
   return (
-    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-8">
-      <span className={`inline-block ${isChanging ? 'animate-fade-out' : 'animate-fade-in'}`}>
+    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-8 relative">
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-accent/20 to-primary/20 blur-xl rounded-full -z-10"></div>
+      <span className={`inline-block transition-opacity duration-700 ${isChanging ? 'opacity-0' : 'opacity-100'}`}>
         {translatorTitle[currentLang]}
       </span>
     </h1>

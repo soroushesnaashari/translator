@@ -5,7 +5,7 @@ import { LanguageSelector } from '@/components/LanguageSelector';
 import { TranslationBox } from '@/components/TranslationBox';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, ArrowRight, Globe, Github, Linkedin, Twitter, Globe2 } from 'lucide-react';
+import { ArrowLeftRight, Globe, Github, Linkedin, Twitter } from 'lucide-react';
 
 const Index = () => {
   const {
@@ -25,32 +25,20 @@ const Index = () => {
       <main className="container max-w-5xl py-8 px-4 md:py-12">
         <TranslatingTitle />
         
-        <div className="mb-8">
+        <div className="mb-12">
           <p className="text-center text-muted-foreground max-w-md mx-auto">
             A professional translation tool created by<br />
-            Mohammad Soroush Esnaashari
+            <span className="font-mono font-bold">Mohammad Soroush Esnaashari</span>
           </p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
           <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <LanguageSelector 
-                value={sourceLang} 
-                onChange={setSourceLang} 
-                label="Source Language" 
-              />
-              <div className="hidden lg:block">
-                <Button 
-                  variant="ghost" 
-                  size="icon"
-                  onClick={swapLanguages}
-                  className="mt-6"
-                >
-                  <ArrowRight className="h-5 w-5" />
-                </Button>
-              </div>
-            </div>
+            <LanguageSelector 
+              value={sourceLang} 
+              onChange={setSourceLang} 
+              label="Source Language" 
+            />
             <TranslationBox 
               value={sourceText} 
               onChange={setSourceText}
@@ -70,21 +58,22 @@ const Index = () => {
               placeholder={isTranslating ? "Translating..." : "Translation will appear here..."}
             />
           </div>
-          
-          <div className="lg:hidden flex justify-center my-2">
-            <Button 
-              variant="outline" 
-              onClick={swapLanguages}
-              className="w-full max-w-xs"
-            >
-              <ArrowRight className="h-5 w-5 mr-2" />
-              Swap Languages
-            </Button>
-          </div>
         </div>
         
-        <footer className="mt-16 text-center text-muted-foreground">
-          <div className="flex justify-center space-x-4 mb-3">
+        <div className="flex justify-center my-6">
+          <Button 
+            variant="outline" 
+            onClick={swapLanguages}
+            className="w-auto"
+            size="sm"
+          >
+            <ArrowLeftRight className="h-4 w-4 mr-2" />
+            Swap Languages
+          </Button>
+        </div>
+        
+        <footer className="mt-24 text-center text-muted-foreground">
+          <div className="flex justify-center space-x-4 mb-4">
             <a href="https://soroushesnaashari.github.io/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
               <Globe className="h-5 w-5" />
             </a>
@@ -98,8 +87,8 @@ const Index = () => {
               <Twitter className="h-5 w-5" />
             </a>
           </div>
-          <p>© 2025 Mohammad Soroush Esnaashari</p>
-          <p className="mt-1">Currently using mock translations for demonstration purposes.</p>
+          <p className="text-sm">© 2025 Mohammad Soroush Esnaashari</p>
+          <p className="mt-1 text-xs">Currently using mock translations for demonstration purposes.</p>
         </footer>
       </main>
     </div>

@@ -5,7 +5,7 @@ import { LanguageSelector } from '@/components/LanguageSelector';
 import { TranslationBox } from '@/components/TranslationBox';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Globe, Github, Linkedin, Twitter, Globe2 } from 'lucide-react';
 
 const Index = () => {
   const {
@@ -27,8 +27,7 @@ const Index = () => {
         
         <div className="mb-8">
           <p className="text-center text-muted-foreground max-w-md mx-auto">
-            A professional translation tool for developers and content creators, 
-            providing fast and accurate translations.
+            A professional translation tool by Mohammad Soroush Esnaashari
           </p>
         </div>
         
@@ -60,8 +59,7 @@ const Index = () => {
                   onClick={swapLanguages}
                   className="mt-6"
                 >
-                  <ArrowLeft className="h-4 w-4 mr-1" />
-                  <ArrowRight className="h-4 w-4 ml-1" />
+                  <Globe2 className="h-5 w-5" />
                 </Button>
               </div>
             </div>
@@ -78,14 +76,27 @@ const Index = () => {
               onClick={swapLanguages}
               className="w-full max-w-xs"
             >
-              <ArrowLeft className="h-4 w-4 mr-2" />
+              <Globe2 className="h-5 w-5 mr-2" />
               Swap Languages
-              <ArrowRight className="h-4 w-4 ml-2" />
             </Button>
           </div>
         </div>
         
-        <footer className="mt-16 text-center text-xs text-muted-foreground">
+        <footer className="mt-16 text-center text-muted-foreground">
+          <div className="flex justify-center space-x-4 mb-3">
+            <a href="https://soroushesnaashari.github.io/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              <Globe className="h-5 w-5" />
+            </a>
+            <a href="https://linkedin.com/in/soroushesnaashari" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a href="https://github.com/soroushesnaashari" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              <Github className="h-5 w-5" />
+            </a>
+            <a href="https://x.com/srshesn" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+              <Twitter className="h-5 w-5" />
+            </a>
+          </div>
           <p>Developer-focused translation tool &copy; {new Date().getFullYear()}</p>
           <p className="mt-1">Currently using mock translations for demonstration purposes.</p>
         </footer>

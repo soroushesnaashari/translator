@@ -27,30 +27,18 @@ const Index = () => {
         
         <div className="mb-8">
           <p className="text-center text-muted-foreground max-w-md mx-auto">
-            A professional translation tool by Mohammad Soroush Esnaashari
+            A professional translation tool created by<br />
+            Mohammad Soroush Esnaashari
           </p>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
           <div className="space-y-3">
-            <LanguageSelector 
-              value={sourceLang} 
-              onChange={setSourceLang} 
-              label="Source Language" 
-            />
-            <TranslationBox 
-              value={sourceText} 
-              onChange={setSourceText}
-              placeholder="Enter text to translate..."
-            />
-          </div>
-          
-          <div className="space-y-3">
             <div className="flex items-center justify-between">
               <LanguageSelector 
-                value={targetLang} 
-                onChange={setTargetLang} 
-                label="Target Language" 
+                value={sourceLang} 
+                onChange={setSourceLang} 
+                label="Source Language" 
               />
               <div className="hidden lg:block">
                 <Button 
@@ -59,10 +47,23 @@ const Index = () => {
                   onClick={swapLanguages}
                   className="mt-6"
                 >
-                  <Globe2 className="h-5 w-5" />
+                  <ArrowRight className="h-5 w-5" />
                 </Button>
               </div>
             </div>
+            <TranslationBox 
+              value={sourceText} 
+              onChange={setSourceText}
+              placeholder="Enter text to translate..."
+            />
+          </div>
+          
+          <div className="space-y-3">
+            <LanguageSelector 
+              value={targetLang} 
+              onChange={setTargetLang} 
+              label="Target Language" 
+            />
             <TranslationBox 
               value={translatedText} 
               isReadOnly={true}
@@ -76,7 +77,7 @@ const Index = () => {
               onClick={swapLanguages}
               className="w-full max-w-xs"
             >
-              <Globe2 className="h-5 w-5 mr-2" />
+              <ArrowRight className="h-5 w-5 mr-2" />
               Swap Languages
             </Button>
           </div>
@@ -97,7 +98,7 @@ const Index = () => {
               <Twitter className="h-5 w-5" />
             </a>
           </div>
-          <p>Developer-focused translation tool &copy; {new Date().getFullYear()}</p>
+          <p>© 2025 Mohammad Soroush Esnaashari</p>
           <p className="mt-1">Currently using mock translations for demonstration purposes.</p>
         </footer>
       </main>

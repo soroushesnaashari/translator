@@ -10,8 +10,8 @@ export function useTranslation() {
   const [isTranslating, setIsTranslating] = useState(false);
   const { toast } = useToast();
 
-  // This is a mock translation function
-  // In a real application, you would replace this with an API call
+  // Mock translation function that simulates API translation
+  // In a production app, this would be replaced with a real API call
   const translateText = async (text: string, from: string, to: string) => {
     if (!text) {
       setTranslatedText('');
@@ -22,12 +22,58 @@ export function useTranslation() {
     
     try {
       // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 800));
       
-      // Mock translation (in a real app, replace with actual API call)
-      // This just adds language codes to demonstrate the UI flow
-      const mockResult = `[${from}->${to}] ${text}`;
+      // Enhanced mock translation with language-specific patterns
+      let mockResult = text;
+      
+      // Apply some simple pattern replacements based on target language
+      // This is just to simulate different languages, not actual translation
+      switch (to) {
+        case 'es':
+          mockResult = text
+            .replace(/the /gi, 'el ')
+            .replace(/is /gi, 'es ')
+            .replace(/hello/gi, 'hola')
+            .replace(/world/gi, 'mundo');
+          break;
+        case 'fr':
+          mockResult = text
+            .replace(/the /gi, 'le ')
+            .replace(/is /gi, 'est ')
+            .replace(/hello/gi, 'bonjour')
+            .replace(/world/gi, 'monde');
+          break;
+        case 'de':
+          mockResult = text
+            .replace(/the /gi, 'die ')
+            .replace(/is /gi, 'ist ')
+            .replace(/hello/gi, 'hallo')
+            .replace(/world/gi, 'welt');
+          break;
+        case 'fa':
+          // Simple Persian placeholder replacements
+          mockResult = text
+            .replace(/the /gi, 'آن ')
+            .replace(/is /gi, 'است ')
+            .replace(/hello/gi, 'سلام')
+            .replace(/world/gi, 'دنیا');
+          break;
+        default:
+          // Add prefix to show it's a simulated translation
+          mockResult = `[${from}->${to}] ${text}`;
+      }
+      
       setTranslatedText(mockResult);
+      
+      // Show success message for the first translation only
+      if (translatedText === '') {
+        toast({
+          title: "Translation complete",
+          description: "Using simulated translation. Connect to a real API for production use.",
+          duration: 3000,
+        });
+      }
     } catch (error) {
       toast({
         title: "Translation failed",
@@ -55,6 +101,7 @@ export function useTranslation() {
     setSourceLang(targetLang);
     setTargetLang(sourceLang);
     setSourceText(translatedText);
+    setTranslatedText('');
     // Translating will be triggered by the useEffect when sourceText changes
   };
 

@@ -91,7 +91,7 @@ const Index = () => {
             </a>
           </div>
           <p className="text-sm">© 2025 Mohammad Soroush Esnaashari</p>
-          <p className="mt-1 text-xs">Connected to LibreTranslate API with local fallback.</p>
+          <p className="mt-1 text-xs">Connected to MyMemory Translation API with local fallback.</p>
         </footer>
       </main>
     </div>

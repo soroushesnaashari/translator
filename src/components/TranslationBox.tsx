@@ -21,10 +21,13 @@ export function TranslationBox({
   isLoading = false
 }: TranslationBoxProps) {
   return (
-    <div className="glass-card w-full relative">
+    <div className="glass-card w-full relative rounded-md overflow-hidden">
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-background/50 z-20 rounded-md">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <div className="absolute inset-0 flex items-center justify-center bg-background/70 backdrop-blur-sm z-20 rounded-md">
+          <div className="flex flex-col items-center space-y-2">
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <span className="text-sm font-medium text-muted-foreground">Translating...</span>
+          </div>
         </div>
       )}
       <div className="absolute top-2 right-2 z-10">
@@ -35,7 +38,7 @@ export function TranslationBox({
         onChange={e => onChange && onChange(e.target.value)}
         placeholder={placeholder}
         readOnly={isReadOnly || isLoading}
-        className={`code-editor w-full resize-none ${isReadOnly ? 'bg-codeblock/50' : ''}`}
+        className={`code-editor w-full resize-none p-4 ${isReadOnly ? 'bg-codeblock/50' : ''}`}
         style={{ minHeight }}
       />
     </div>

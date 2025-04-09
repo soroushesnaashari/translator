@@ -2,6 +2,13 @@
 import { useState, useEffect } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 
+// LibreTranslate API URLs we can try
+const LIBRE_TRANSLATE_ENDPOINTS = [
+  'https://translate.argosopentech.com/translate',
+  'https://libretranslate.de/translate',
+  'https://translate.terraprint.co/translate'
+];
+
 export function useTranslation() {
   const [sourceText, setSourceText] = useState('');
   const [translatedText, setTranslatedText] = useState('');
@@ -10,8 +17,7 @@ export function useTranslation() {
   const [isTranslating, setIsTranslating] = useState(false);
   const { toast } = useToast();
 
-  // Mock translation function that simulates API translation
-  // In a production app, this would be replaced with a real API call
+  // Function to translate text using LibreTranslate API
   const translateText = async (text: string, from: string, to: string) => {
     if (!text) {
       setTranslatedText('');
@@ -20,15 +26,55 @@ export function useTranslation() {
     
     setIsTranslating(true);
     
+    // Try each endpoint until one works
+    for (const endpoint of LIBRE_TRANSLATE_ENDPOINTS) {
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          body: JSON.stringify({
+            q: text,
+            source: from,
+            target: to,
+            format: 'text'
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error(`API responded with status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data && data.translatedText) {
+          setTranslatedText(data.translatedText);
+          
+          // Show success toast only on first successful translation
+          if (translatedText === '') {
+            toast({
+              title: "Translation complete",
+              description: "Connected to LibreTranslate API",
+              duration: 3000,
+            });
+          }
+          
+          setIsTranslating(false);
+          return; // Exit after successful translation
+        }
+      } catch (error) {
+        console.error(`Error with endpoint ${endpoint}:`, error);
+        // Continue to next endpoint if this one failed
+      }
+    }
+    
+    // If we got here, all endpoints failed - fall back to mock translation
     try {
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
       // Enhanced mock translation with language-specific patterns
       let mockResult = text;
       
       // Apply some simple pattern replacements based on target language
-      // This is just to simulate different languages, not actual translation
       switch (to) {
         case 'es':
           mockResult = text
@@ -52,7 +98,6 @@ export function useTranslation() {
             .replace(/world/gi, 'welt');
           break;
         case 'fa':
-          // Simple Persian placeholder replacements
           mockResult = text
             .replace(/the /gi, 'آن ')
             .replace(/is /gi, 'است ')
@@ -60,20 +105,15 @@ export function useTranslation() {
             .replace(/world/gi, 'دنیا');
           break;
         default:
-          // Add prefix to show it's a simulated translation
           mockResult = `[${from}->${to}] ${text}`;
       }
       
       setTranslatedText(mockResult);
-      
-      // Show success message for the first translation only
-      if (translatedText === '') {
-        toast({
-          title: "Translation complete",
-          description: "Using simulated translation. Connect to a real API for production use.",
-          duration: 3000,
-        });
-      }
+      toast({
+        title: "API Translation failed",
+        description: "Using fallback mock translation. Real API services unavailable.",
+        variant: "destructive",
+      });
     } catch (error) {
       toast({
         title: "Translation failed",

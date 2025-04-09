@@ -43,6 +43,7 @@ const Index = () => {
               value={sourceText} 
               onChange={setSourceText}
               placeholder="Enter text to translate..."
+              isLoading={false}
             />
           </div>
           
@@ -55,7 +56,8 @@ const Index = () => {
             <TranslationBox 
               value={translatedText} 
               isReadOnly={true}
-              placeholder={isTranslating ? "Translating..." : "Translation will appear here..."}
+              placeholder="Translation will appear here..."
+              isLoading={isTranslating}
             />
           </div>
         </div>
@@ -66,6 +68,7 @@ const Index = () => {
             onClick={swapLanguages}
             className="w-auto"
             size="sm"
+            disabled={isTranslating}
           >
             <ArrowLeftRight className="h-4 w-4 mr-2" />
             Swap Languages
@@ -88,7 +91,7 @@ const Index = () => {
             </a>
           </div>
           <p className="text-sm">© 2025 Mohammad Soroush Esnaashari</p>
-          <p className="mt-1 text-xs">Currently using mock translations for demonstration purposes.</p>
+          <p className="mt-1 text-xs">Connected to LibreTranslate API with local fallback.</p>
         </footer>
       </main>
     </div>

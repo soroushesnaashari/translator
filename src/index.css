@@ -1,0 +1,64 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 47% 13%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 252 92% 76%;
+    --primary-foreground: 222 47% 11%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 252 92% 76%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 25%;
+    --input: 217 33% 17%;
+    --ring: 252 92% 76%;
+
+    --radius: 0.5rem;
+    
+    --codeblock: 222 47% 15%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-md border border-border/40 rounded-lg shadow-lg;
+  }
+  
+  .code-editor {
+    @apply bg-codeblock font-mono rounded-md border border-border/40 p-3 focus:outline-none focus:ring-1 focus:ring-accent/50;
+  }
+  
+  .transition-all-200 {
+    @apply transition-all duration-200;
+  }
+}

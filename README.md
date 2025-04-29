@@ -1,1 +1,1 @@
-A **`"Translator"`** web app creating by [Lovable](https://lovable.dev/)
+A **`"Translator"`** web app vibe coding with [Lovable](https://lovable.dev/)
